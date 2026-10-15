@@ -1,12 +1,10 @@
 import os
-from crewai import Agent, Task, Crew, Process
-from langchain_google_genai import ChatGoogleGenerativeAI
+from crewai import Agent, Task, Crew, Process, LLM
 
-# 1. 구글 공식 LangChain 연결망 사용 (404 버그 완벽 우회)
-llm = ChatGoogleGenerativeAI(
-    model="gemini-1.5-flash",
-    google_api_key=os.environ.get("GEMINI_API_KEY"),
-    temperature=0.7
+# 1. 최신 CrewAI 문법에 맞춘 공식 LLM 객체 사용
+llm = LLM(
+    model="gemini/gemini-1.5-flash",
+    api_key=os.environ.get("GEMINI_API_KEY")
 )
 
 # 2. 기획자 에이전트 만들기
