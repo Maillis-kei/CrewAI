@@ -1,2 +1,3 @@
-crewai
+crewai[google-genai]
 crewai-tools
+
