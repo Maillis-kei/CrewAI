@@ -1,3 +1,6 @@
 crewai[google-genai]
 crewai-tools
 python-dotenv
+gTTS
+Pillow
+imageio-ffmpeg
