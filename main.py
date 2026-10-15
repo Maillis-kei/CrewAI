@@ -1,10 +1,11 @@
 import os
-from crewai import Agent, Task, Crew, Process, LLM
+from crewai import Agent, Task, Crew, Process
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-# 1. 깃허브가 GEMINI_API_KEY를 이미 주고 있으므로 복잡한 설정 삭제!
-# API 키는 CrewAI가 알아서 찾아갑니다.
-llm = LLM(
-    model="gemini/gemini-1.5-flash",
+# 1. 구글 공식 LangChain 연결망 사용 (404 버그 완벽 우회)
+llm = ChatGoogleGenerativeAI(
+    model="gemini-1.5-flash",
+    google_api_key=os.environ.get("GEMINI_API_KEY"),
     temperature=0.7
 )
 
