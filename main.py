@@ -11,8 +11,9 @@ def main():
     if not api_key:
         raise ValueError("GEMINI_API_KEY 또는 GOOGLE_API_KEY 환경변수가 설정되지 않았습니다.")
 
+    # 최신 Google Gemini 모델: gemini-3.8-flash
     llm = LLM(
-        model="gemini/gemini-2.0-flash",
+        model="gemini/gemini-3.8-flash",
         api_key=api_key,
         temperature=0.7
     )
