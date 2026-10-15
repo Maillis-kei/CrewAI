@@ -3,8 +3,8 @@ from crewai import Agent, Task, Crew, Process, LLM
 
 # 제미나이 두뇌 연결 (GitHub Secrets에서 키를 가져옴)
 llm = LLM(
-    model="gemini/gemini-1.5-flash",
-    api_key=os.environ.get("GEMINIAPIKEY")
+    model="gemini-1.5-flash", 
+    api_key=os.environ.get("geminiapikey")
 )
 
 # 1. 기획자 에이전트 만들기
