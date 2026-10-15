@@ -3,7 +3,7 @@ from crewai import Agent, Task, Crew, Process, LLM
 
 # 제미나이 두뇌 연결 (GitHub Secrets에서 키를 가져옴)
 llm = LLM(
-    model="gemini-1.5-flash", 
+    model="gemini/gemini-pro",  # <--- 이 부분을 변경합니다!
     api_key=os.environ.get("geminiapikey")
 )
 
