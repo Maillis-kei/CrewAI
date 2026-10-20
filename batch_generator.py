@@ -1,8 +1,64 @@
 import argparse
 import json
 import os
+import subprocess
 import time
 from video_generator import VideoGenerator
+
+def get_ffmpeg_binary():
+    """시스템 ffmpeg 또는 imageio_ffmpeg 바이너리 경로 탐색"""
+    try:
+        res = subprocess.run(["ffmpeg", "-version"], capture_output=True)
+        if res.returncode == 0:
+            return "ffmpeg"
+    except Exception:
+        pass
+    try:
+        import imageio_ffmpeg
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:
+        pass
+    return "ffmpeg"
+
+def merge_videos(video_files: list[str], output_path: str) -> bool:
+    """개별 씬 비디오들을 하나의 완성본 MP4로 자동 무손실 병합"""
+    if not video_files:
+        return False
+    if len(video_files) == 1:
+        import shutil
+        shutil.copyfile(video_files[0], output_path)
+        return True
+
+    ffmpeg_bin = get_ffmpeg_binary()
+    temp_list_file = os.path.join(os.path.dirname(output_path), "concat_list.txt")
+
+    try:
+        with open(temp_list_file, "w", encoding="utf-8") as f:
+            for vf in video_files:
+                abs_p = os.path.abspath(vf).replace("\\", "/")
+                f.write(f"file '{abs_p}'\n")
+
+        print(f"\n🎬 [자동 병합] {len(video_files)}개 씬을 하나의 최종 영상으로 병합 중...")
+        cmd = [
+            ffmpeg_bin, "-y",
+            "-f", "concat",
+            "-safe", "0",
+            "-i", temp_list_file,
+            "-c", "copy",
+            output_path
+        ]
+        res = subprocess.run(cmd, capture_output=True, text=True)
+        if res.returncode == 0:
+            print(f"[✓] 최종 합본 영상 생성 완료: {output_path}")
+            if os.path.exists(temp_list_file):
+                os.remove(temp_list_file)
+            return True
+        else:
+            print(f"[!] 영상 병합 실패: {res.stderr}")
+            return False
+    except Exception as e:
+        print(f"[!] 병합 중 오류 발생: {e}")
+        return False
 
 def run_batch(scenes_file: str = "scenes.json", output_dir: str = "/content/drive/MyDrive/ai_videos"):
     """scenes.json을 파싱하여 모든 씬을 연속 렌더링"""
@@ -65,9 +121,13 @@ def run_batch(scenes_file: str = "scenes.json", output_dir: str = "/content/driv
     print("\n" + "="*60)
     print(f"🎉 모든 씬 렌더링이 성공적으로 완료되었습니다!")
     print(f"⏱ 총 소요 시간: {total_elapsed:.1f}초")
-    print("📦 생성된 비디오 목록:")
+    print("📦 생성된 개별 비디오 목록:")
     for f in generated_files:
         print(f"  - {f}")
+    
+    # 3. 모든 씬을 하나의 완성본 비디오로 자동 병합
+    combined_movie_path = os.path.join(output_dir, "final_combined_movie.mp4")
+    merge_videos(generated_files, combined_movie_path)
     print("="*60)
 
 if __name__ == "__main__":

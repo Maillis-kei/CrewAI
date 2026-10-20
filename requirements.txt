@@ -5,6 +5,7 @@ langchain-community
 langchain-ollama
 pydantic>=2.0.0
 python-dotenv
+streamlit>=1.30.0
 
 # Video Generation & Diffusers (Colab GPU Environment)
 torchao>=0.17.0
