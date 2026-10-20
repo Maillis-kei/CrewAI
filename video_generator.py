@@ -43,9 +43,12 @@ class VideoGenerator:
 
         # VRAM 최적화 (Colab T4 16GB 메모리 초과 방지)
         if self.device == "cuda":
-            print("[*] VRAM 최적화 적용 (CPU Offload 및 VAE Slicing)...")
+            print("[*] VRAM 최적화 적용 (CPU Offload)...")
             self.pipeline.enable_model_cpu_offload()
-            self.pipeline.enable_vae_slicing()
+            if hasattr(self.pipeline, "enable_vae_slicing"):
+                self.pipeline.enable_vae_slicing()
+            elif hasattr(self.pipeline, "vae") and hasattr(self.pipeline.vae, "enable_slicing"):
+                self.pipeline.vae.enable_slicing()
 
     def generate(
         self,
