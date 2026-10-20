@@ -1,0 +1,15 @@
+# CrewAI & Multi-agent Pipeline (Local / Server)
+crewai>=0.70.0
+crewai-tools
+langchain-community
+langchain-ollama
+pydantic>=2.0.0
+python-dotenv
+
+# Video Generation & Diffusers (Colab GPU Environment)
+diffusers>=0.28.0
+transformers>=4.40.0
+accelerate>=0.29.0
+imageio[ffmpeg]
+torch
+torchvision

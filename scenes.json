@@ -1,0 +1,29 @@
+[
+  {
+    "scene_id": 1,
+    "file_name": "scene_01.mp4",
+    "prompt": "A cinematic wide establishing shot of a futuristic cyberpunk megacity at rainy night, towering neon skyscrapers reflecting on wet asphalt, volumetric mist, photorealistic, 8k resolution, highly detailed, smooth slow pan",
+    "negative_prompt": "blurry, deformed, flickering, low quality, bad anatomy, text, watermark, cartoon",
+    "num_frames": 16,
+    "guidance_scale": 7.5,
+    "num_inference_steps": 25
+  },
+  {
+    "scene_id": 2,
+    "file_name": "scene_02.mp4",
+    "prompt": "A dynamic tracking shot following a sleek futuristic hoverbike speeding through neon-lit highway canyon, cyan and magenta jet exhaust trails, motion blur, cinematic lighting, sharp focus, masterwork",
+    "negative_prompt": "blurry, deformed, flickering, low quality, bad anatomy, text, watermark, cartoon",
+    "num_frames": 16,
+    "guidance_scale": 7.5,
+    "num_inference_steps": 25
+  },
+  {
+    "scene_id": 3,
+    "file_name": "scene_03.mp4",
+    "prompt": "An intense close-up shot of an autonomous surveillance drone deploying red laser scanners while diving down from the clouds, intricate mechanical details, cinematic lens flare, 4k, photorealistic",
+    "negative_prompt": "blurry, deformed, flickering, low quality, bad anatomy, text, watermark, cartoon",
+    "num_frames": 16,
+    "guidance_scale": 7.5,
+    "num_inference_steps": 25
+  }
+]

@@ -1,0 +1,26 @@
+# Environment variables
+.env
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# Output videos and logs
+outputs/
+*.mp4
+*.gif
+*.png
+
+# OS metadata
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
